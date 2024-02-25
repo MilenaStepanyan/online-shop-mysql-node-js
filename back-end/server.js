@@ -19,9 +19,7 @@ app.use(
   authRole("admin"),
   AdminProductRoutes
 );
-app.get("/api/protected-route", authToken, (req, res) => {
-  res.send("You accessed a protected route!");
-});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
