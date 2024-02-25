@@ -1,5 +1,5 @@
-import { authRole } from "../../middlewares/authRoles.js";
 import express from "express";
+import { authRole } from "../../middlewares/authRoles.js";
 import { authToken } from "../../middlewares/authTokens.js";
 import { pool } from "../../db/db.js";
 
@@ -7,7 +7,7 @@ import { pool } from "../../db/db.js";
 const router = express.Router();
 
 router.post("/", authToken, authRole("admin"), async (req, res) => {
-  const [name, description, price, picture, quantity, category, rating] =
+  const {name, description, price, picture, quantity, category, rating} =
     req.body; 
     if (!name || !description || !price || !quantity) {
       res.status(400).json({ massage: "Missing fields" });

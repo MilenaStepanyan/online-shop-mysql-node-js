@@ -1,18 +1,24 @@
 import jwt from "jsonwebtoken";
+import { pool } from "../db/db.js";
+export const SECRET_KEY = "secretKeyAit"
+export const authToken = async (req, res, next) => {
+  const token = req.header("auth-token");
+  if (!token) return res.status(401).json({ message: "Access Denied" });
 
-export const SECRET_KEY = "secretkeyait";
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY  );
+    const userId = decoded.user.id;
 
-export function authToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  if (!token) return res.sendStatus(401);
-  jwt.verify(token, SECRET_KEY, (err, user) => {
-    if (err) {
-      return res.sendStatus(403);
-    }
-    req.user = user;
+    const connection = await pool.getConnection();
+    const [userRow] = await connection.execute(
+      "SELECT * FROM users WHERE id = ?",
+      [userId]
+    );
+    connection.release();
+
+    req.user = userRow[0];
     next();
-  });
-}
-
-// export default authToken
+  } catch (err) {
+    res.status(400).json({ message: "Invalid Token" });
+  }
+};
