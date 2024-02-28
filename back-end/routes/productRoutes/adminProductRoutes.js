@@ -86,4 +86,57 @@ router.put("/:id",async(req,res)=>{
     console.log(error);
   }
 })
+router.delete("/:id",async(req,res)=>{
+ const id = parseInt(req.params.id)
+  try{
+    const deleteProduct = await pool.query(
+      "DELETE FROM products WHERE id = ?",
+      [id]
+    )
+
+    if (deleteProduct[0].affectedRows === 0) {
+      return res.status(404).json({ msg: "Product not found" });
+    }
+
+    res.json({
+      msg: "Product deleted successfully",
+      product: { id: id },
+    });
+  }catch(error){
+    console.log(error);
+  }
+})
+router.get("/review/:id",async(req,res)=>{
+  const id = parseInt(req.params.id)
+  try{
+    const singleProductReview = await pool.query(
+      "SELECT * FROM reviews WHERE id=?",
+      [id]
+    ) 
+res.json(singleProductReview)
+
+  }catch(error){
+    res.send(400).json("Error getting review")
+  }
+})
+router.delete("review/:id",async(req,res)=>{
+  const id = parseInt(req.params.id)
+   try{
+     const deleteReview = await pool.query(
+       "DELETE FROM reviews WHERE id = ?",
+       [id]
+     )
+ 
+     if (deleteReview[0].affectedRows === 0) {
+       return res.status(404).json({ msg: "Product not found" });
+     }
+ 
+     res.json({
+       msg: "review deleted successfully",
+       product: { id: id },
+     });
+   }catch(error){
+     console.log(error);
+   }
+ })
 export default router;
