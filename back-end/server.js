@@ -5,6 +5,7 @@ import {authToken} from "./middlewares/authTokens.js";
 import {authRole} from "./middlewares/authRoles.js";
 import AdminProductRoutes from "../back-end/routes/productRoutes/adminProductRoutes.js"
 import adminRoutes from "../back-end/routes/adminRouter.js"
+import userProductRoutes from "../back-end/routes/productRoutes/userProductRoutes.js"
 
 const app = express()
 const port = 5001;
@@ -18,6 +19,11 @@ app.use(
   authToken,
   authRole("admin"),
   AdminProductRoutes
+);
+app.use(
+  "/api/user/products",
+  authToken,
+  userProductRoutes
 );
 
 app.listen(port, () => {
