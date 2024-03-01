@@ -97,5 +97,22 @@ router.post("/:productId/ratings", async (req, res) => {
       res.status(500).json({ msg: "Server Error" });
     }
   });
+  router.post('/order', async (req, res) => {
+    const { productName, quantity } = req.body;
+  
+    try {
+      const result = await pool.query('UPDATE products SET available_quantity = available_quantity - ? WHERE name = ?', [quantity, productName]);
+  
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ msg: "Product not found" });
+      }
+  
+      console.log('Order processed successfully.');
+      res.status(200).send('Order processed successfully.');
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+      res.status(500).send('Error processing order.');
+    }
+  });
   
 export default router;

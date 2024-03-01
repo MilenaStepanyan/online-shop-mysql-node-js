@@ -4,6 +4,7 @@ import axios from 'axios';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -11,14 +12,17 @@ const Login = () => {
         username,
         password
       });
-      console.log(response.data);
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      window.location.href = '/products';
     } catch (error) {
-      console.error(error.response.data.message);
+      setError('Error logging in: ' + error.response.data.message);
     }
   };
 
   return (
-    <>
+    <div>
+      <h2>Login</h2>
       <input
         type="text"
         placeholder="Username"
@@ -32,7 +36,8 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
-    </>
+      {error && <p>{error}</p>}
+    </div>
   );
 };
 
