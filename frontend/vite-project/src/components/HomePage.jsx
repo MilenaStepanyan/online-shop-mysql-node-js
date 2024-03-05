@@ -15,7 +15,7 @@ const HomePage = () => {
                 <span><li>Home</li></span> 
                 <li><Link className='path-to-login'  to="/login">Login</Link></li>
                 <li><Link className='path-to-register'  to="/register">Sign Up</Link></li>
-                <li><Link className='path-to-products'  to="/products">Shop</Link></li>
+                <li><Link className='path-to-login'  to="/products">Shop</Link></li>
               </ul>
             </nav>
           </div>

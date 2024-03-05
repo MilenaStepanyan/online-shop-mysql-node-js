@@ -4,9 +4,11 @@ import Login from './components/Login';
 import "./App.css"
 import Register from './components/Register';
 import ProductsPage from './components/Products';
-import AdminRoutes from './AdminRoutes';
+import ProtectedPage from '../../../back-end/routes/ProtectedPage';
+
 
 function App() {
+
   return (
     <Router>
       <Routes> 
@@ -14,7 +16,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/admin/*" element={<AdminRoutes />} /> 
+        <Route path="/admin" element={<ProtectedPage />} />
       </Routes>
     </Router>
   );

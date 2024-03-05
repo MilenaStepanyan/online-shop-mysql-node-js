@@ -43,7 +43,7 @@ export const loginUser = async (req, res) => {
     );
     connection.release();
     if (userRow.length === 0)
-      return res.status(401).json({ massage: "Invalid Credentials" });
+      return res.status(401).json({ message: "Invalid Credentials" });
     const isPasswordMatch = await bcrypt.compare(password, userRow[0].password);
 
     if (!isPasswordMatch) {
@@ -58,7 +58,7 @@ export const loginUser = async (req, res) => {
 
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
 
-    res.json({ token });
+    res.json({ token, isAdmin: userRow[0].role === 'admin' });
   } catch (error) {
     console.error("Error while logging in user", error);
     res.status(500).json({ message: "Server error" });

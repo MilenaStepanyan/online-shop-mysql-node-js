@@ -12,9 +12,13 @@ const Login = () => {
         username,
         password
       });
-      const token = response.data.token;
+      const { token, isAdmin } = response.data;
       localStorage.setItem('token', token);
-      window.location.href = '/products';
+      if (isAdmin) {
+        window.location.href = '/admin';
+      } else {
+        window.location.href = '/products';
+      }
     } catch (error) {
       setError('Error logging in: ' + error.response.data.message);
     }

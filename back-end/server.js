@@ -17,6 +17,7 @@ app.use("/api/admin", authToken, authRole("admin"), adminRoutes);
 app.use(
   "/api/admin/products",
   authToken,
+  authToken,
   authRole("admin"),
   AdminProductRoutes
 );
