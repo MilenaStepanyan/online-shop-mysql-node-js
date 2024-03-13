@@ -1,42 +1,13 @@
 import { Link } from "react-router-dom";
-import logoMobile from "../../../images/logoMobile.png";
 import phonePic from "../../../images/iphone.png";
 import iphone14Pic from "../../../images/iphone-14.png";
 import iphone14plus from "../../../images/iphone-14-and-plus.jpg";
+import Header from "./Header";
+import Footer from "./Footer";
 const HomePage = () => {
   return (
     <div className="HomePage">
-      <div className="header">
-        <div className="container">
-          <div className="logo">
-            <img className="img-logo" src={logoMobile} alt="" />
-          </div>
-          <div className="list">
-            <nav className="nav-bar">
-              <ul className="untitled-lists-header">
-                <span>
-                  <li>Home</li>
-                </span>
-                <li>
-                  <Link className="path-to-login" to="/login">
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link className="path-to-register" to="/register">
-                    Sign Up
-                  </Link>
-                </li>
-                <li>
-                  <Link className="path-to-login" to="/products">
-                    Shop
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
+      <Header/>
       <div className="getStarted">
         <div className="beginingOfMobile">
           <div className="MobileStore">
@@ -72,6 +43,7 @@ const HomePage = () => {
         </div>
         <img src={iphone14plus} alt="" />
       </div>
+      <Footer/>
     </div>
   );
 };

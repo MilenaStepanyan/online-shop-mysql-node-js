@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './Header';
+
 
 const ProtectedPage = () => {
   const [products, setProducts] = useState([]);
@@ -106,7 +108,7 @@ const ProtectedPage = () => {
         }
       });
       setProducts([...products, response.data]);
-      // Clear new product form fields
+
       setNewProductData({
         name: '',
         description: '',
@@ -120,10 +122,14 @@ const ProtectedPage = () => {
   };
 
   return (
+    
     <div>
+      <Header/>
+
       <h2>Products</h2>
       {error && <p>{error}</p>}
       <div>
+     
         {products.map(product => (
           <div key={product.id}>
             <h3>{product.name}</h3>
@@ -157,6 +163,7 @@ const ProtectedPage = () => {
           <button type="submit">Add Product</button>
         </form>
       </div>
+     
     </div>
   );
 };

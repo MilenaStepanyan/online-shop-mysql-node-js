@@ -4,7 +4,7 @@ import Login from './components/Login';
 import "./App.css"
 import Register from './components/Register';
 import ProductsPage from './components/Products';
-import ProtectedPage from '../../../back-end/routes/ProtectedPage';
+import ProtectedPage from './components/ProtectedPage';
 
 
 function App() {
