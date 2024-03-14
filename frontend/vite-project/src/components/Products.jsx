@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -268,6 +269,7 @@ const Products = () => {
         ))}
       </div>
       </div>
+      <Footer/>
     </div>
   );
 };
