@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const ProtectedPage = () => {
   const [products, setProducts] = useState([]);
@@ -271,6 +272,7 @@ const ProtectedPage = () => {
             <button type="submit">Add Product</button>
           </form>
         </div>
+        <Footer/>
       </div>
     </>
   );
