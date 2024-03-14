@@ -107,13 +107,13 @@ const Products = () => {
       {error && <p>{error}</p>}
       <div>
         {products.map(product => (
+          
           <div key={product.id}>
             <h3>{product.name}</h3>
             <p>Description: {product.description}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {product.available_quantity}</p>
-
-
+            <img src={`http://localhost:5001/${product.image_url}`} alt={product.image_url} style={{ maxWidth: '100px', height: 'auto' }} />
             <h4>Reviews:</h4>
             {product.reviews && product.reviews.map(review => (
               <div key={review.id}>

@@ -112,7 +112,7 @@ const ProtectedPage = () => {
       formData.append('price', newProductData.price);
       formData.append('quantity', newProductData.quantity);
       formData.append('category', newProductData.category);
-      formData.append('picture', newProductData.picture); // Append the file here
+      formData.append('picture', newProductData.picture); 
   
       const response = await axios.post('http://localhost:5001/api/admin/products', formData, {
         headers: {

@@ -12,6 +12,7 @@ const port = 5001;
 app.use(express.json())
 app.use(cors())
 app.post("/api/login",loginUser)
+app.use(express.static('uploads'));
 app.post("/api/register",registerUser)
 app.use("/api/admin", authToken, authRole("admin"), adminRoutes);
 app.use(
