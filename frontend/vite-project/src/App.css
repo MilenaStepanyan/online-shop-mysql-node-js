@@ -505,3 +505,37 @@ h2 {
 .error {
   color: #dc3545;
 }
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  color: black;
+  margin-top: 150px;
+  background-color: #ffffffde;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.socialMedia {
+  width: 70vw;
+}
+
+.socialMedia ul {
+  cursor: pointer;
+  display: flex;
+  padding: 30px;
+  gap: 30px;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialMedia ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Header from './Header';
+import Footer from './Footer';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -87,6 +88,7 @@ const Login = () => {
         </form>
         {error && <p>{error}</p>} 
       </div>
+      <Footer/>
     </div>
   );
 };

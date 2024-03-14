@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -95,6 +96,7 @@ const Register = () => {
           </p>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };
