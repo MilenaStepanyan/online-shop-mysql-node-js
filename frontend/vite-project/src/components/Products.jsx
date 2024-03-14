@@ -8,6 +8,13 @@ const Products = () => {
   const [reviewContents, setReviewContents] = useState({});
   const [ratings, setRatings] = useState({});
   const [orderQuantities, setOrderQuantities] = useState({});
+  const [sortBy, setSortBy] = useState('id');
+  const [sortOrder, setSortOrder] = useState('ASC');
+  const [search, setSearch] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,6 +26,15 @@ const Products = () => {
         const response = await axios.get('http://localhost:5001/api/user/products', {
           headers: {
             "auth-token":  token
+          },
+          params: {
+            sortBy,
+            sortOrder,
+            search,
+            minPrice,
+            maxPrice,
+            page,
+            limit
           }
         });
         setProducts(response.data);
@@ -28,7 +44,7 @@ const Products = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [sortBy, sortOrder, search, minPrice, maxPrice, page, limit]);
 
   const handleReviewSubmit = async (productId) => {
     try {
@@ -105,6 +121,32 @@ const Products = () => {
        <Header/>
       <h2>Products</h2>
       {error && <p>{error}</p>}
+
+      <label>
+          Sort By:
+          <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+            <option value="id">ID</option>
+            <option value="name">Name</option>
+
+          </select>
+        </label>
+        <label>
+          Sort Order:
+          <select value={sortOrder} onChange={e => setSortOrder(e.target.value)}>
+            <option value="ASC">Ascending</option>
+            <option value="DESC">Descending</option>
+          </select>
+        </label>
+
+        <label>
+          Page Limit:
+          <input type="number" value={limit} onChange={e => setLimit(e.target.value)} />
+        </label>
+
+        <input type="text" placeholder="Search" value={search} onChange={e => setSearch(e.target.value)} />
+        <input type="number" placeholder="Min Price" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
+        <input type="number" placeholder="Max Price" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} />
+
       <div>
         {products.map(product => (
           
