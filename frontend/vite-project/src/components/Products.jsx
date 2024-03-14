@@ -207,7 +207,7 @@ const Products = () => {
             className="product-image"
               src={`http://localhost:5001/${product.image_url}`}
               alt={product.image_url}
-              style={{ maxWidth: "100px", height: "auto" }}
+              style={{ maxWidth: "200px", height: "auto" }}
             />
             <h4>Reviews:</h4>
             {product.reviews &&
