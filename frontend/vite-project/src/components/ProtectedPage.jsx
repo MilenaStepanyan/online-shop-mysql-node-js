@@ -12,7 +12,8 @@ const ProtectedPage = () => {
     description: '',
     price: '',
     quantity: '',
-    category: ''
+    category: '',
+    image: null
   });
 
   useEffect(() => {
@@ -94,7 +95,9 @@ const ProtectedPage = () => {
     const { name, value } = e.target;
     setNewProductData({ ...newProductData, [name]: value });
   };
-
+  const handleFileChange = (e) => {
+    setNewProductData({ ...newProductData, picture: e.target.files[0] });
+  };
   const handleAddProduct = async (e) => {
     e.preventDefault();
     try {
@@ -102,19 +105,30 @@ const ProtectedPage = () => {
       if (!token) {
         throw new Error('Token not found. Please log in.');
       }
-      const response = await axios.post('http://localhost:5001/api/admin/products', newProductData, {
+  
+      const formData = new FormData();
+      formData.append('name', newProductData.name);
+      formData.append('description', newProductData.description);
+      formData.append('price', newProductData.price);
+      formData.append('quantity', newProductData.quantity);
+      formData.append('category', newProductData.category);
+      formData.append('picture', newProductData.picture); // Append the file here
+  
+      const response = await axios.post('http://localhost:5001/api/admin/products', formData, {
         headers: {
-          "auth-token": token
+          'auth-token': token,
+          'Content-Type': 'multipart/form-data'
         }
       });
+  
       setProducts([...products, response.data]);
-
       setNewProductData({
         name: '',
         description: '',
         price: '',
         quantity: '',
-        category: ''
+        category: '',
+        picture: null
       });
     } catch (error) {
       setError('Error adding product: ' + error.message);
@@ -146,6 +160,7 @@ const ProtectedPage = () => {
                 <input type="number" name="price" placeholder="Price" value={newProductData.price} onChange={handleChange} />
                 <input type="number" name="quantity" placeholder="Quantity" value={newProductData.quantity} onChange={handleChange} />
                 <input type="text" name="category" placeholder="Category" value={newProductData.category} onChange={handleChange} />
+                <input type="file" name="picture" onChange={handleFileChange} />
                 <button type="submit">Save</button>
               </form>
             )}
@@ -160,6 +175,7 @@ const ProtectedPage = () => {
           <input type="number" name="price" placeholder="Price" value={newProductData.price} onChange={handleChange} />
           <input type="number" name="quantity" placeholder="Quantity" value={newProductData.quantity} onChange={handleChange} />
           <input type="text" name="category" placeholder="Category" value={newProductData.category} onChange={handleChange} />
+          <input type="file" name="picture" onChange={(e) => setNewProductData({ ...newProductData, picture: e.target.files[0] })} />
           <button type="submit">Add Product</button>
         </form>
       </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from './Header';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -63,7 +64,7 @@ const Products = () => {
           "auth-token":  token
         }
       });
-      // Refresh products after rating
+
       const response = await axios.get('http://localhost:5001/api/user/products', {
         headers: {
           "auth-token":  token
@@ -99,7 +100,9 @@ const Products = () => {
   };
 
   return (
+   
     <div>
+       <Header/>
       <h2>Products</h2>
       {error && <p>{error}</p>}
       <div>
@@ -132,7 +135,7 @@ const Products = () => {
               <option value="0">Select Rating</option>
               <option value="1">1</option>
               <option value="2">2</option>
-              <option value="3">3</option>
+              <option value="3">3</option> 
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
